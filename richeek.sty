@@ -1,0 +1,149 @@
+\usepackage{amsthm, amssymb, amsmath, bm, mathtools, physics, dsfont}
+\usepackage{pifont}
+% \usepackage{newtxtext}
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\usepackage[pdftex,xetex]{graphicx}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{caption}
+\captionsetup[table]{font={stretch=1,small}, labelfont=bf}
+\captionsetup[figure]{font={stretch=1,small}, labelfont=bf}
+% \usepackage[USenglish]{babel}
+\usepackage[final]{microtype}
+
+\usepackage[allcolors=Cerulean,colorlinks=true]{hyperref}
+\usepackage{url}
+\usepackage{footnotebackref}
+\usepackage{tablefootnote}
+\usepackage{footmisc}
+\usepackage{tikz}
+\usepackage[square, numbers]{natbib}
+\usepackage{bigdelim}
+\usepackage{siunitx}
+\usepackage{adjustbox}
+
+\usepackage{setspace,float, tabularx, multirow, subcaption, environ, wrapfig, nicefrac,booktabs,colortbl,fontawesome,soul,comment, blindtext}
+\usepackage[normalem]{ulem}
+
+\usepackage[capitalize]{cleveref}
+\renewcommand{\Cref}[1]{\cref{#1}}
+\crefname{section}{Sec.}{Secs.}
+\crefname{appendix}{Sec.}{Secs.}
+
+\newcommand{\aeq}[1]{\begin{align} #1 \end{align}}
+\newcommand{\aeqs}[1]{\begin{align*} #1 \end{align*}}
+\newcommand{\aed}[1]{\begin{aligned} #1 \end{aligned}}
+\newcommand{\beq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\beqs}[1]{\begin{equation*}#1\end{equation*}}
+
+\newcommand{\mpage}[2]{\begin{center}
+\begin{minipage}{#1}#2\end{minipage}\end{center}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\inner}[2]{\left\langle #1,#2 \right\rangle}
+\newcommand{\rbr}[1]{\left(#1\right)}
+\newcommand{\sbr}[1]{\left[#1\right]}
+\newcommand{\cbr}[1]{\left\{#1\right\}}
+\newcommand{\nbr}[1]{\left\|#1\right\|}
+\newcommand{\abr}[1]{\left|#1\right|}
+% \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+\newcommand{\indep}{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\la}{\ \leftarrow\ }
+\newcommand{\ra}{\rightarrow}
+\newcommand{\from}{\la}
+\providecommand\f[2]{\ensuremath \frac{#1}{#2}}
+
+\DeclareMathOperator{\given}{\, \vert\ }
+\DeclareMathOperator*{\argmin}{\text{argmin}}
+\DeclareMathOperator*{\median}{\text{median}}
+\DeclareMathOperator*{\argmax}{\text{argmax}}
+\DeclareMathOperator{\sign}{\text{sign}}
+\DeclareMathOperator{\logdet}{\text{logdet}}
+\DeclareMathOperator{\logm}{\text{logm}}
+\DeclareMathOperator{\diag}{\text{diag}}
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\Var}{\text{Var}}
+\DeclareMathOperator*{\cov}{\text{Cov}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\providecommand{\ones}{\mathbbm{1}}
+\providecommand{\ind}[1]{{\bf 1}_{\cbr{#1}}}
+\providecommand{\nnot}[1]{\overline{#1}}
+\providecommand{\oor}{\vee}
+\providecommand{\aand}{\wedge}
+\renewcommand{\implies}{\Rightarrow}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{fact}[theorem]{Fact}
+
+\def \d {\delta}
+\def \s {\sigma}
+\def \w {\omega}
+\def \r {\rho}
+\def \t {\tau}
+\def \th {\theta}
+\def \a {\alpha}
+\def \b {\beta}
+\def \p {\phi}
+\def \e {\epsilon}
+\def \g {\gamma}
+\def \z {\zeta}
+\def \l {\lambda}
+\def \k {\kappa}
+\def \i {\dot{\iota}}
+
+\def \D {\Delta}
+\def \G {\Gamma}
+\def \L {\Lambda}
+\def \S {\Sigma}
+\def \Th {\Theta}
+\def \Om {\Omega}
+\def \tOm {\widetilde{\Om}}
+
+\newcommand{\oo}{
+  \mathchoice
+    {{\scriptstyle\mathcal{O}}}% \displaystyle
+    {{\scriptstyle\mathcal{O}}}% \textstyle
+    {{\scriptscriptstyle\mathcal{O}}}% \scriptstyle
+    {\scalebox{.6}{$\scriptscriptstyle\mathcal{O}$}}%\scriptscriptstyle
+  }
+\def \TT {\mathcal{T}}
+\def \CC {\mathcal{C}}
+\def \XX {\mathcal{X}}
+\def \LL {\mathcal{L}}
+\def \QQ {\mathcal{Q}}
+\def \DD {\mathcal{D}}
+\def \EE {\mathcal{E}}
+\def \FF {\mathcal{F}}
+\def \HH {\mathcal{H}}
+\def \GG {\mathcal{G}}
+\def \OO {\mathcal{O}}
+\def \tOO {\widetilde{\mathcal{O}}}
+\def \BB {\mathcal{B}}
+\def \PP {\mathcal{P}}
+\def \MM {\mathcal{M}}
+
+\def \integers {\mathbb{Z}}
+\def \naturals {\mathbb{N}}
+\def \reals {\mathbb{R}}
+\def \complex {\mathbb{C}}
+
+\def \Z {\mathbb{Z}}
+\def \R {\mathbb{R}}
