@@ -1,0 +1,23 @@
+# add gitignore for tex
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.dvi
+*.lof
+*.lot
+*.lol
+*.glo
+*.ist
+*.acn
+*.acr
+*.alg
+_minted*

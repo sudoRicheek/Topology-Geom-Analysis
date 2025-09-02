@@ -1,5 +1,5 @@
 \documentclass[12pt,letterpaper]{article}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1in]{geometry}
 
 \linespread{1.05}
 \usepackage{richeek}
@@ -13,8 +13,178 @@
 
 \maketitle
 
+\section*{Problem B1 (1-7 Lee)}
+
+\paragraph{(a)} A line passing through points $N$ and $x \in \symmetric^n \backslash \{N\}$ can be parameterized as:
+\aeqs{
+    L(t) &= N + t(x-N) \text{ for } t \in \R \\
+         &= (0,0,\ldots,0,1) + t((x^1,x^2,\ldots,x^{n+1}) - (0,0,\ldots,0,1)) \\
+         &= (tx^1, tx^2, \ldots, tx^n, 1 + t(x^{n+1} - 1))
+}
+
+We find the intersection of this line with the hyperplane $H = \{x \in \R^{n+1} : x^{n+1} = 0\}$ by setting the last coordinate to zero and solving for $t$:
+\aeqs{
+    0 &= 1 + t(x^{n+1} - 1) \\
+    \implies t &= \frac{1}{1 - x^{n+1}}
+}
+
+The intersection point is then:
+\aeqs{
+    L\rbr{\frac{1}{1 - x^{n+1}}} &= \rbr{\frac{x^1, x^2, \ldots, x^n}{1 - x^{n+1}}, 0 } = \rbr{u, 0}
+}
+
+Therefore, the stereographic projection map $\s$ from $\symmetric^n \backslash \{N\}$ to $\R^n$ is given by:
+\aeqs{
+    \s(x) &= u = \frac{(x^1, x^2, \ldots, x^n)}{1 - x^{n+1}}
+}
+
+Similarly, we can find the stereographic projection map from the south pole: $\tilde{\s}: \symmetric^n \backslash \{S\} \to \R^n$ where $S = (0,0,\ldots,0,-1)$:
+\aeqs{
+    \tilde{\s}(x) &= \frac{(x^1, x^2, \ldots, x^n)}{1 + x^{n+1}}
+}
+
+\paragraph{(b)} We show that $\s$ is bijective. Let us propose:
+\aeqs{
+    \s^{-1}(u) = \frac{\rbr{2u^1, 2u^2, \ldots, 2u^n, \abr{u}^2 - 1}}{\abr{u}^2 + 1}
+}
+
+We can show that the image of $\s^{-1}$ lies on $\symmetric^n \backslash \cbr{N}$:
+\aeqs{
+    \abr{\s^{-1}(u)}^2 &= \frac{\S_{i=1}^n (2u^i)^2 + (\abr{u}^2 - 1)^2}{(\abr{u}^2 + 1)^2} \\
+    &= \frac{4\abr{u}^2 + \abr{u}^4 - 2\abr{u}^2 + 1}{\abr{u}^4 + 2\abr{u}^2 + 1} = 1
+}
+
+So, $\s^{-1}(u) \in \symmetric^n$. Also, $\s^{-1}(u) \neq N$ since the last coordinate is $\frac{\abr{u}^2 - 1}{\abr{u}^2 + 1} \neq 1$ for any $u \in \R^n$. Thus, $\s^{-1}(u) \in \symmetric^n \backslash \cbr{N}$.
+
+Next, we show that $\s$ and $\s^{-1}$ are inverses of each other:
+\aeqs{
+    \s(\s^{-1}(u)) &= \rbr{\frac{2u^1, 2u^2, \ldots, 2u^n}{\abr{u}^2 + 1}} / \rbr{1 - \frac{\abr{u}^2 - 1}{\abr{u}^2 + 1}} = \frac{\rbr{2u^1, 2u^2, \ldots, 2u^n}}{(\abr{u}^2 + 1) \cdot \frac{2}{\abr{u}^2 + 1}} = u
+}
+
+Let us calculate $\abr{\s(x)}^2 = \frac{1 + x^{n+1}}{1 - x^{n+1}}$:
+\aeqs{
+    \s^{-1}(\s(x)) &= \frac{\rbr{\frac{2x^1}{1 - x^{n+1}}, \frac{2x^2}{1 - x^{n+1}}, \ldots, \frac{2x^n}{1 - x^{n+1}}, \frac{1 + x^{n+1}}{1 - x^{n+1}} - 1}}{\frac{1 + x^{n+1}}{1 - x^{n+1}} + 1} \\
+    &= \frac{\rbr{\frac{2x^1}{1 - x^{n+1}}, \frac{2x^2}{1 - x^{n+1}}, \ldots, \frac{2x^n}{1 - x^{n+1}}, \frac{2x^{n+1}}{1 - x^{n+1}}}}{\frac{2}{1 - x^{n+1}}} = (x^1, x^2, \ldots, x^n, x^{n+1}) = x
+}
+
+Therefore, $\s$ is bijective with inverse $\s^{-1}$.
+
+\paragraph{(c)} The transition map from the north pole chart to the south pole chart is given by $\tilde{\s} \circ \s^{-1}$. We can write this composition as:
+\aeqs{
+    \tilde{\s} \circ \s^{-1}(u) &= \tilde{\s}\rbr{\frac{\rbr{2u^1, 2u^2, \ldots, 2u^n, \abr{u}^2 - 1}}{\abr{u}^2 + 1}} = \frac{\rbr{\frac{2u^1}{\abr{u}^2 + 1}, \frac{2u^2}{\abr{u}^2 + 1}, \ldots, \frac{2u^n}{\abr{u}^2 + 1}}}{1 + \frac{\abr{u}^2 - 1}{\abr{u}^2 + 1}} = \frac{u}{\abr{u}^2}
+}
+
+To verify that the atlas defines a smooth structure we check that the transition map is smooth $C^{\infty}$. The map $\tilde{\s} \circ \s^{-1}$ is a rational function with denominator $\abr{u}^2 = \S_{i=1}^n (u^i)^2$ which is non-zero for all $u \in \R^n \backslash \{0\}$. Therefore, the transition map is smooth and the atlas defines a smooth structure on $\symmetric^n$.
+
+\paragraph{(d)} We want to show that this smooth structure is the same as the standard smooth structure. This requires us to show that for each of the $2n+2$ coordinate charts in the example, and each of the two stereographic projection charts, the transition maps are smooth.
+
+Consider the standard chart domain: $U_i^+ = \{x \in \symmetric^n : x^i > 0\}$ and the standard chart map: $\phi_i^+ (x^1, x^2, \ldots, x^{n+1}) = (x^1, \ldots, x^{i-1}, x^{i+1}, \ldots, x^{n+1})$. Inverse of this map is given by $(\phi_i^+)^{-1}(x^1, \ldots, x^{i-1}, x^{i+1}, \ldots, x^{n+1}) = (x^1, \ldots, x^{i-1}, \sqrt{1 - \S_{j \neq i} (x^j)^2}, x^{i+1}, \ldots, x^{n+1})$.
+
+Now consider the transformation from the stereographic projection chart at the north pole to the standard chart at $U_i^+$:
+\aeqs{
+    \phi_i^+ \circ \s^{-1}(u) &= \phi_i^+ \rbr{\frac{\rbr{2u^1, 2u^2, \ldots, 2u^n, \abr{u}^2 - 1}}{\abr{u}^2 + 1}} \\
+    &= \rbr{\frac{2u^1}{\abr{u}^2 + 1}, \ldots, \frac{2u^{i-1}}{\abr{u}^2 + 1}, \frac{2u^{i+1}}{\abr{u}^2 + 1}, \ldots, \frac{2u^n}{\abr{u}^2 + 1}, \frac{\abr{u}^2 - 1}{\abr{u}^2 + 1}}
+}
+
+This is a rational function with denominator $\abr{u}^2 + 1$ which is non-zero for all $u \in \R^n$. Therefore, the transition map is smooth. Similarly, consider the transformation from the standard chart at $U_i^+$ to the stereographic projection chart at the north pole:
+\aeqs{
+    \s \circ (\phi_i^+)^{-1}(x^1, \ldots, x^{i-1}, x^{i+1}, \ldots, x^{n+1}) &= \s \rbr{x^1, \ldots, x^{i-1}, \sqrt{1 - \S_{j \neq i} (x^j)^2}, x^{i+1}, \ldots, x^{n+1}} \\
+    &= \frac{\rbr{x^1, \ldots, x^{i-1}, \sqrt{1 - \S_{j \neq i} (x^j)^2}, x^{i+1}, \ldots, x^n}}{1 - x^{n+1}}
+}
+
+This is a rational function with denominator $1 - x^{n+1}$ which is non-zero for all $x \in U_i^+$ since $x^{n+1} \leq 1$ on $\symmetric^n$ and $x^{n+1} = 1$ only at the north pole which is not in $U_i^+$. Therefore, the transition map is smooth.
+
+\clearpage
 
 
+\section*{Problem B2 (1-9 Lee)}
+
+Let $\mathbb{CP}^n$ be the set of all 1-dimensional complex-linear subspaces of $\mathbb{C}^{n+1}$. This is an equivalence relation on $\mathbb{C}^{n+1} \setminus \{0\}$, where $z \sim w$ if $z = \lambda w$ for some $\lambda \in \mathbb{C} \setminus \{0\}$.
+
+\paragraph{Manifold}
+To show that $\mathbb{CP}^n$ is a topological manifold, we construct an atlas. For each $j \in \{0, \ldots, n\}$, let $U_j = \{[z^0 : \cdots : z^n] \in \mathbb{CP}^n : z^j \neq 0\}$. Each $U_j$ is open in the quotient topology because its preimage under the projection map $\pi: \mathbb{C}^{n+1} \setminus \{0\} \to \mathbb{CP}^n$ is $\pi^{-1}(U_j) = \{z \in \mathbb{C}^{n+1} \setminus \{0\} : z^j \neq 0\}$, which is open in $\mathbb{C}^{n+1} \setminus \{0\}$. These sets form an open cover of $\mathbb{CP}^n$ (quotient topology). We define a chart map $\phi_j: U_j \to \mathbb{C}^n$ by
+
+\[
+    \phi_j([z^0 : \cdots : z^n]) = \rbr{\frac{z^0}{z^j}, \ldots, \frac{z^{j-1}}{z^j}, \frac{z^{j+1}}{z^j}, \ldots, \frac{z^n}{z^j}}
+\]
+
+The map $\phi_j$ is a homeomorphism from $U_j$ to $\mathbb{C}^n$. Since $\mathbb{C}^n$ is homeomorphic to $\mathbb{R}^{2n}$, this shows that $\mathbb{CP}^n$ is locally Euclidean of dimension $2n$.
+
+The space $\mathbb{C}^{n+1} \setminus \{0\}$ is second-countable, and the quotient space of a second-countable space is second-countable. To show $\mathbb{CP}^n$ is Hausdorff, consider two distinct points $[z], [w] \in \mathbb{CP}^n$. This means $z$ and $w$ are not scalar multiples of each other. We can choose representatives such that $\abr{z} = \abr{w} = 1$. The angle between them is non-zero. We can find disjoint open neighborhoods of $z$ and $w$ in $\mathbb{C}^{n+1} \setminus \{0\}$ that are invariant under multiplication by complex numbers of modulus 1. Their projections to $\mathbb{CP}^n$ will be disjoint open neighborhoods of $[z]$ and $[w]$. Thus, $\mathbb{CP}^n$ is a $2n$-dimensional topological manifold.
+
+\paragraph{Compactness}
+Let $S^{2n+1} = \{z \in \mathbb{C}^{n+1} : \abr{z}^2 = \sum_{i=0}^n |z^i|^2 = 1\}$. This is the unit sphere in $\mathbb{C}^{n+1} \cong \mathbb{R}^{2n+2}$, which is compact. The restriction of the projection map $\pi: S^{2n+1} \to \mathbb{CP}^n$ is surjective. Since the continuous image of a compact set is compact, $\mathbb{CP}^n$ is compact.
+
+\paragraph{Smooth Structure}
+We show that the atlas $\{ (U_j, \phi_j) \}_{j=0}^n$ defines a smooth structure. Let $u = (u^0, \ldots, u^{j-1}, u^{j+1}, \ldots, u^n)$ be coordinates on $\mathbb{C}^n$ for the chart $\phi_j$, and $v = (v^0, \ldots, v^{k-1}, v^{k+1}, \ldots, v^n)$ for the chart $\phi_k$. The transition map $\phi_k \circ \phi_j^{-1}$ is defined on $\phi_j(U_j \cap U_k)$.
+For $u \in \phi_j(U_j \cap U_k)$, we have:
+\[ \phi_j^{-1}(u) = [u^0 : \cdots : u^{j-1} : 1 : u^{j+1} : \cdots : u^n]. \]
+In this equivalence class, the $k$-th component is $u^k$ (if $k \neq j$) or $1$ (if $k=j$). Since we are in $U_k$, this component is non-zero.
+Then $\phi_k \circ \phi_j^{-1}(u)$ is obtained by dividing all components by the $k$-th component. For $k < j$:
+\[ v^i = \begin{cases} u^i/u^k & i < k \\ u^{i+1}/u^k & k \le i < j-1 \\ 1/u^k & i = j-1 \\ u^{i}/u^k & j-1 < i \end{cases} \]
+Each component of the transition map is a rational function of the complex variables $u^i$. Since we identify $\mathbb{C}^n$ with $\mathbb{R}^{2n}$ by $(x^1+iy^1, \ldots) \mapsto (x^1, y^1, \ldots)$, these maps are smooth where the denominator is non-zero, which is true on $U_j \cap U_k$. The atlas defines a smooth structure on $\mathbb{CP}^n$.
+
+\clearpage
+
+\section*{Problem D}
+
+We want to show that the volume of the unit 3-sphere $\symmetric^3$ in $\R^4$ is $2\pi^2$. The equation for $\symmetric^3$ is $x_1^2 + x_2^2 + x_3^2 + x_4^2 = 1$.
+
+Let's group the coordinates into two pairs: $(x_1, x_2)$ and $(x_3, x_4)$. Let $r_1 = \sqrt{x_1^2 + x_2^2}$ be the radius in the $x_1x_2$-plane and $r_2 = \sqrt{x_3^2 + x_4^2}$ be the radius in the $x_3x_4$-plane. The equation for the 3-sphere becomes $r_1^2 + r_2^2 = 1$.
+
+Since $r_1$ and $r_2$ are non-negative, this equation describes a quarter circle in the $(r_1, r_2)$-plane. We can parameterize this quarter circle with an angle $\psi \in [0, \pi/2]$:
+\[ r_1 = \cos\psi, \quad r_2 = \sin\psi \]
+
+For any fixed value of $\psi$ between $0$ and $\pi/2$, we have two separate circles:
+\begin{itemize}
+    \item $x_1^2 + x_2^2 = \cos^2\psi$: A circle in the $x_1x_2$-plane with radius $\cos\psi$. Its circumference is $2\pi\cos\psi$.
+    \item $x_3^2 + x_4^2 = \sin^2\psi$: A circle in the $x_3x_4$-plane with radius $\sin\psi$. Its circumference is $2\pi\sin\psi$.
+\end{itemize}
+The set of points in $\R^4$ for a fixed $\psi$ is the product of these two circles, which forms a torus. The surface area of this torus is the product of the two circumferences: $(2\pi\cos\psi)(2\pi\sin\psi) = 4\pi^2\cos\psi\sin\psi$. The 3-sphere can be seen as a union of these tori parameterized by $\psi$. To find the total volume of the 3-sphere, we can integrate the surface area of these tori.
+
+We integrate along the arc of the quarter circle in the $(r_1, r_2)$-plane. The arc length element $ds$ for the curve $(r_1(\psi), r_2(\psi)) = (\cos\psi, \sin\psi)$ is $ds = d\psi$. The volume of the 3-sphere is the integral of the torus surface area along this arc:
+
+\aeqs{
+    \text{Vol}(\symmetric^3) &= 4\pi^2 \int_0^{\pi/2} \frac{1}{2}\sin(2\psi) \, d\psi \\
+    &= 2\pi^2 \left[ -\frac{1}{2}\cos(2\psi) \right]_0^{\pi/2} \\
+    &= 2\pi^2 \left( -\frac{1}{2}\cos(\pi) - \left(-\frac{1}{2}\cos(0)\right) \right) \\
+    &= 2\pi^2 \left( \frac{1}{2} + \frac{1}{2} \right) = 2\pi^2
+}
+Thus, the volume of the unit 3-sphere is $2\pi^2$.
+
+\clearpage
+
+\section*{Problem E}
+
+We want to show that the Grassmann manifold $G_k(\R^n)$ of oriented $k$-planes in $\R^n$ is a smooth manifold. We will do this by constructing an atlas of coordinate charts and showing that the transition maps are smooth.
+
+An oriented $k$-plane can be represented by an ordered, orthonormal basis $\{v_1, \ldots, v_k\}$. We can represent this basis as an $n \times k$ matrix $V = [v_1 | \cdots | v_k]$ such that $V^T V = I_k$.
+
+Let $\alpha = (\alpha_1, \ldots, \alpha_k)$ be an ordered multi-index with $1 \le \alpha_1 < \cdots < \alpha_k \le n$. There are $\binom{n}{k}$ such multi-indices. For each $\alpha$, let $V_\alpha$ be the $k \times k$ submatrix of $V$ formed by the rows indexed by $\alpha$.
+
+We define a collection of open sets $\{U_\alpha\}$ that cover $G_k(\R^n)$. Let $U_\alpha$ be the set of all oriented $k$-planes whose representing matrix $V$ has an invertible submatrix $V_\alpha$.
+\[ U_\alpha = \{ [V] \in G_k(\R^n) : \det(V_\alpha) \neq 0 \} \]
+These sets cover the manifold because for any $k$-plane, we can always find a basis such that the corresponding matrix $V$ has at least one invertible $k \times k$ submatrix.
+
+Now, we define the coordinate charts $\phi_\alpha: U_\alpha \to M_{k \times (n-k)}(\R) \cong \R^{k(n-k)}$. For any plane in $U_\alpha$, we can choose a unique basis (and thus a unique representative matrix $V$) such that $V_\alpha = I_k$. This is our canonical representative for the plane in this chart. Let $\alpha^c$ be the multi-index of the $n-k$ rows not in $\alpha$. Let $V_{\alpha^c}$ be the $(n-k) \times k$ submatrix of $V$ with rows from $\alpha^c$. The chart map is defined as:
+\[ \phi_\alpha([V]) = (V_{\alpha^c})^T \]
+
+This map takes a plane in $U_\alpha$ and maps it to a $k \times (n-k)$ matrix, which we identify with a point in $\R^{k(n-k)}$. The map is well-defined and bijective.
+
+To show this is a smooth manifold, we must check that the transition maps are smooth. Let's consider two overlapping charts, $(U_\alpha, \phi_\alpha)$ and $(U_\beta, \phi_\beta)$. Let $X = \phi_\alpha([V])$ and $Y = \phi_\beta([V])$ for some plane $[V] \in U_\alpha \cap U_\beta$.
+
+From the definition of $\phi_\alpha$, the canonical matrix $V$ for the chart $U_\alpha$ has $V_\alpha = I_k$ and $(V_{\alpha^c})^T = X$. We can reconstruct $V$ from $X$.
+This matrix $V$ represents our plane, but it is not the canonical representative for the chart $U_\beta$, because $V_\beta \neq I_k$. To find the coordinates in the $\beta$-chart, we must find a new matrix $V'$ representing the same plane, such that $V'_\beta = I_k$.
+Since $V$ and $V'$ represent the same plane, they are related by $V' = VG$ for some $G \in GL(k, \R)$.
+From $V'_\beta = I_k$, we have $(VG)_\beta = I_k$. The rows of $VG$ are the rows of $V$ multiplied by $G$. So, $V_\beta G = I_k$, which implies $G = (V_\beta)^{-1}$.
+The new coordinates are $Y = \phi_\beta([V]) = \phi_\beta([V']) = (V'_{\beta^c})^T$.
+\[ Y = ((VG)_{\beta^c})^T = (V_{\beta^c} G)^T = G^T (V_{\beta^c})^T = ((V_\beta)^{-1})^T (V_{\beta^c})^T \]
+The matrices $V_\beta$ and $V_{\beta^c}$ are submatrices of $V$, which is constructed from $X$. The entries of $V$ are either constants (0 or 1, from $V_\alpha=I_k$) or are the entries of $X$ (from $V_{\alpha^c}$). Therefore, the entries of $V_\beta$ and $V_{\beta^c}$ are smooth (in fact, linear) functions of the entries of $X$.
+
+The transition map $\phi_\beta \circ \phi_\alpha^{-1}: \phi_\alpha(U_\alpha \cap U_\beta) \to \phi_\beta(U_\alpha \cap U_\beta)$ is given by $X \mapsto Y = ((V_\beta(X))^{-1})^T (V_{\beta^c}(X))^T$.
+
+
+The entries of $V_\beta(X)$ and $V_{\beta^c}(X)$ are smooth functions of the coordinates of $X$. The determinant of $V_\beta(X)$ is a polynomial in the entries of $X$, and it is non-zero on the domain of the transition map, $U_\alpha \cap U_\beta$. The entries of the inverse matrix $(V_\beta)^{-1}$ are rational functions of the entries of $V_\beta$, with the non-zero determinant in the denominator, making the inversion map smooth. Since matrix multiplication is also a smooth operation, the transition map $X \mapsto Y$ is a composition of smooth functions and is therefore smooth. This confirms that we have a covering family of charts with smooth transition maps, proving that $G_k(\R^n)$ is a smooth manifold of dimension $k(n-k)$.
 
 
 
